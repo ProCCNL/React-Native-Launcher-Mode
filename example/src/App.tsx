@@ -3,15 +3,11 @@ import { StyleSheet, View, Text } from 'react-native';
 import LauncherMode from 'react-native-launcher-mode';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    LauncherMode.multiply(3, 7).then(setResult);
-  }, []);
+  console.log(LauncherMode.resetPreferredLauncherAndOpenChooser());
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Result</Text>
     </View>
   );
 }

@@ -9,6 +9,7 @@
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
+      android:launchMode="singleInstance"
       android:theme="@style/AppTheme">
       <activity
         android:name=".MainActivity"
@@ -19,8 +20,21 @@
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
+            <category android:name="android.intent.category.HOME" />
+            <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
       </activity>
+
+
+    <activity
+        android:name="com.reactnativelaunchermode.FakeLauncherActivity"
+        android:enabled="false">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.HOME" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
 
