@@ -35,4 +35,29 @@ class LauncherModeModule(private val reactContext: ReactApplicationContext) : Re
       promise.resolve(true);
       return true;
     }
+
+    @ReactMethod
+    fun isPreferredLauncher(promise: Promise): Boolean {
+        val filter = IntentFilter(Intent.ACTION_MAIN)
+        filter.addCategory(Intent.CATEGORY_HOME)
+        val filters = ArrayList<IntentFilter>()
+        filters.add(filter)
+        val myPackageName = reactContext.getPackageName()
+        val activities = ArrayList<ComponentName>()
+        val packageManager = reactContext.getPackageManager() as PackageManager
+        // You can use name of your package here as third argument
+        packageManager.getPreferredActivities(filters, activities, null)
+        for (activity in activities)
+        {
+          if (myPackageName == activity.getPackageName())
+          {
+            promise.resolve(true);
+            return true
+          }
+        }
+        promise.resolve(false);
+        return false
+      }
+
+
 }
