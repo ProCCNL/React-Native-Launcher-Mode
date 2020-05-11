@@ -39,24 +39,12 @@ class LauncherModeModule(private val reactContext: ReactApplicationContext) : Re
 
     @ReactMethod(isBlockingSynchronousMethod = true)
     fun isPreferredLauncher(): Boolean {
-        val filter = IntentFilter(Intent.ACTION_MAIN)
-        filter.addCategory(Intent.CATEGORY_HOME)
-        val filters = ArrayList<IntentFilter>()
-        filters.add(filter)
-        val myPackageName = reactContext.getPackageName()
-        val activities = ArrayList<ComponentName>()
-        val packageManager = reactContext.getPackageManager() as PackageManager
-        // You can use name of your package here as third argument
-        packageManager.getPreferredActivities(filters, activities, null)
-        for (activity in activities)
-        {
-          if (myPackageName == activity.getPackageName())
-          {
-            return true
-          }
-        }
-        return false
-      }
+      val localPackageManager = reactContext.getPackageManager()
+      val intent = Intent("android.intent.action.MAIN")
+      intent.addCategory("android.intent.category.HOME")
+      val str = localPackageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY).activityInfo.packageName
+      return str == reactContext.getPackageName()
+    }
 
 
 }
