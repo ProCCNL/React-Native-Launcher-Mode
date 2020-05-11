@@ -24,7 +24,7 @@ class LauncherModeModule(private val reactContext: ReactApplicationContext) : Re
     // Example method
     // See https://facebook.github.io/react-native/docs/native-modules-android
 
-    @ReactMethod
+    @ReactMethod(isBlockingSynchronousMethod = true)
     fun resetPreferredLauncherAndOpenChooser(): Boolean {
       val packageManager = reactContext.getPackageManager()
       val componentName = ComponentName(reactContext, "com.reactnativelaunchermode.FakeLauncherActivity")
@@ -37,7 +37,7 @@ class LauncherModeModule(private val reactContext: ReactApplicationContext) : Re
       return true;
     }
 
-    @ReactMethod
+    @ReactMethod(isBlockingSynchronousMethod = true)
     fun isPreferredLauncher(): Boolean {
         val filter = IntentFilter(Intent.ACTION_MAIN)
         filter.addCategory(Intent.CATEGORY_HOME)
