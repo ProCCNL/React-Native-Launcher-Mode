@@ -13,7 +13,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.IntentFilter
 import android.util.Log
-import android.util.ArrayList
+import java.util.ArrayList
 
 class LauncherModeModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
