@@ -1,7 +1,8 @@
 import { NativeModules } from 'react-native';
 
 type LauncherModeType = {
-  multiply(a: number, b: number): Promise<number>;
+  resetPreferredLauncherAndOpenChooser(): Promise<boolean>;
+  isPreferredLauncher(): Promise<boolean>;
 };
 
 const { LauncherMode } = NativeModules;

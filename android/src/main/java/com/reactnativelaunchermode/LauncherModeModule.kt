@@ -25,7 +25,7 @@ class LauncherModeModule(private val reactContext: ReactApplicationContext) : Re
     // See https://facebook.github.io/react-native/docs/native-modules-android
 
     @ReactMethod
-    fun resetPreferredLauncherAndOpenChooser(): Boolean {
+    fun resetPreferredLauncherAndOpenChooser(final Promise promise): Boolean {
       val packageManager = reactContext.getPackageManager()
       val componentName = ComponentName(reactContext, "com.reactnativelaunchermode.FakeLauncherActivity")
       packageManager.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
@@ -34,16 +34,16 @@ class LauncherModeModule(private val reactContext: ReactApplicationContext) : Re
       selector.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
       reactContext.startActivity(selector)
       packageManager.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, PackageManager.DONT_KILL_APP)
-      return true;
+      promise.resolve(true)
     }
 
     @ReactMethod
-    fun isPreferredLauncher(): Boolean {
+    fun isPreferredLauncher(final Promise promise): Boolean {
       val localPackageManager = reactContext.getPackageManager()
       val intent = Intent("android.intent.action.MAIN")
       intent.addCategory("android.intent.category.HOME")
       val str = localPackageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY).activityInfo.packageName
-      return str == reactContext.getPackageName()
+      promise.resolve(str == reactContext.getPackageName())
     }
 
 
