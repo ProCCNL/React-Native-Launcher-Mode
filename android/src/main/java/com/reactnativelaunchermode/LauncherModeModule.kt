@@ -26,7 +26,7 @@ class LauncherModeModule(private val reactContext: ReactApplicationContext) : Re
 
     @ReactMethod
     fun resetPreferredLauncherAndOpenChooser(promise: Promise): Promise {
-      /*
+
       val packageManager = reactContext.getPackageManager()
       val componentName = ComponentName(reactContext, "com.reactnativelaunchermode.FakeLauncherActivity")
       packageManager.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
@@ -34,14 +34,8 @@ class LauncherModeModule(private val reactContext: ReactApplicationContext) : Re
       selector.addCategory(Intent.CATEGORY_HOME)
       selector.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
       reactContext.startActivity(selector)
-      packageManager.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, PackageManager.DONT_KILL_APP)
-      */
+      packageManager.setComponentEnabledSetting(componentName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
 
-      val localPackageManager = reactContext.getPackageManager()
-      var selector = Intent(Intent.ACTION_MAIN)
-      selector.addCategory(Intent.CATEGORY_HOME)
-      selector.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK )
-      reactContext.startActivity(Intent.createChooser(selector, "Select your app:"))
 
       promise.resolve(true)
       return promise
