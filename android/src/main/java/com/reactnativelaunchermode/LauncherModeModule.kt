@@ -40,7 +40,7 @@ class LauncherModeModule(private val reactContext: ReactApplicationContext) : Re
       val localPackageManager = reactContext.getPackageManager()
       var selector = Intent(Intent.ACTION_MAIN)
       selector.addCategory(Intent.CATEGORY_HOME)
-      selector.addFlags( Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET )
+      selector.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK )
       reactContext.startActivity(Intent.createChooser(selector, "Select your app:"))
 
       promise.resolve(true)
